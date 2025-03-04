@@ -7,7 +7,11 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 //Middleware
-app.use(cors());
+app.use(cors({
+    origin: ['https://your-frontend-deployed-url.railway.app', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 
@@ -78,10 +82,18 @@ app.get('/api/search', async (req, res) => {
             return res.status(400).json({ message: "Search term is required" });
         }
         console.log("Search Term:", searchTerm);  // Log the search term
-        const query = { $text: { $search: searchTerm } };
+
+        const query = { $text: { $search: `"searchTerm"` } }; //Quotes added for exact phrase matching
+
         console.log("Mongo Query:", query);  // Log the MongoDB query
 
-        const projection = { score: { $meta: "textScore" } };
+        const projection = { 
+            score: { $meta: "textScore" },
+            articleTitle: 1,
+            journal: 1,
+            publicationYear: 1,
+            researchers: 1
+        };
              
         const results = await articlesCollection
             .find(query, { projection })
@@ -89,12 +101,15 @@ app.get('/api/search', async (req, res) => {
             .limit(20)
             .toArray();
 
-        console.log("Search Results:", results);  // Log the results to verify they are returned
+        console.log("Search Results:", results.length);  // Log the results to verify they are returned
 
         res.json(results);
     } catch (error) {
         console.log("Error searching articles:", error);
-        res.status(500).json({ message: "Error searching articles" });
+        res.status(500).json({ 
+            message: "Error searching articles",
+            error: error.message 
+    });
     }
 });
 
