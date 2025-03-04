@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 
 //Middleware
 app.use(cors({
-    origin: ['https://your-frontend-deployed-url.railway.app', 'http://localhost:3000'],
+    origin: ['scholarbase-production.up.railway.app', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
