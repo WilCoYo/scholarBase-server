@@ -11,10 +11,9 @@ const port = process.env.PORT || 8080;
 //     origin: ['https://scholarbase-production.up.railway.app', 'http://localhost:3000'],
 //     methods: ['GET', 'POST', 'OPTIONS'],
 //     allowedHeaders: ['Content-Type', 'Authorization']
-// }))
-// app.use(express.json());
-
+// }));
 app.use(cors());
+app.use(express.json());
 
 
 //MondoDB Connection
@@ -75,9 +74,6 @@ async function connectToMongoDB() {
     }
 }
 
-app.get('/health', (req, res) => {
-    res.json({ status: 'ok' });
-  });
 
 //Search API endpoint
 app.get('/api/search', async (req, res) => {
