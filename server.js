@@ -74,14 +74,6 @@ async function connectToMongoDB() {
     }
 }
 
-// Add these simple test endpoints
-app.get('/', (req, res) => {
-    res.json({ message: 'ScholarBase API is running' });
-  });
-  
-  app.get('/health', (req, res) => {
-    res.json({ status: 'ok', time: new Date().toISOString() });
-  });
 
 
 //Search API endpoint
@@ -103,6 +95,7 @@ app.get('/api/search', async (req, res) => {
             articleTitle: 1,
             journal: 1,
             publicationYear: 1,
+            abstract: 1,
             researchers: 1
         };
              
