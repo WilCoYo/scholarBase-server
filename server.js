@@ -7,12 +7,14 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 //Middleware
-app.use(cors({
-    origin: ['https://scholarbase-production.up.railway.app', 'http://localhost:3000'],
-    methods: ['GET', 'POST', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}))
-app.use(express.json());
+// app.use(cors({
+//     origin: ['https://scholarbase-production.up.railway.app', 'http://localhost:3000'],
+//     methods: ['GET', 'POST', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Authorization']
+// }))
+// app.use(express.json());
+
+app.use(cors());
 
 
 //MondoDB Connection
@@ -72,6 +74,10 @@ async function connectToMongoDB() {
         process.exit(1);
     }
 }
+
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok' });
+  });
 
 //Search API endpoint
 app.get('/api/search', async (req, res) => {
