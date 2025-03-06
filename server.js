@@ -8,7 +8,7 @@ const port = process.env.PORT || 5000;
 
 //Middleware
 app.use(cors({
-    origin: ['https://scholarbase-production.up.railway.app', 'https://scholarbase-server-production.up.railway.app','http://localhost:3000'],
+    origin: ['https://scholarbase.up.railway.app', 'https://scholarbase-server.up.railway.app','http://localhost:3000'],
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
