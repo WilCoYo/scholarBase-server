@@ -7,12 +7,12 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 //Middleware
-// app.use(cors({
-//     origin: ['https://scholarbase-production.up.railway.app', 'http://localhost:3000'],
-//     methods: ['GET', 'POST', 'OPTIONS'],
-//     allowedHeaders: ['Content-Type', 'Authorization']
-// }));
-app.use(cors());
+app.use(cors({
+    origin: ['https://scholarbase-production.up.railway.app', 'http://localhost:3000'],
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 
 
