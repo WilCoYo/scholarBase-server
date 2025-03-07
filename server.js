@@ -96,7 +96,8 @@ app.get('/api/search', async (req, res) => {
             journal: 1,
             publicationYear: 1,
             abstract: 1,
-            researchers: 1
+            researchers: 1,
+            doiLink: 1
         };
              
         const results = await articlesCollection
